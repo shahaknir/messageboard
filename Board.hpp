@@ -9,7 +9,7 @@ namespace ariel
         public:
         Board();
         void post(unsigned int r, unsigned int c, Direction d, string m);
-        string read(unsigned int r, unsigned int c,Direction d, int len);
+        string read(unsigned int r, unsigned int c, Direction d, unsigned int len);
         void show();
     };
 }
