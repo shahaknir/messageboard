@@ -9,43 +9,63 @@ using namespace std;
 
 Board board;
 
-TEST_CASE("Porperly use to MessageBoard code"){
+
+
+TEST_CASE("Good code") {
+
     srand(std::time(NULL));
-    uint r = 0;
-    uint c = 0;
-    int i = 0;
+    uint row =0;
+    uint colum=0;
+    int i =0;
+    int ten= 10;
 
-    // check if the board correctly assigning the range asked
-    CHECK(board.read(1, 1, Direction::Horizontal, 10).compare("___________"));
-    CHECK(board.read(451, 12, Direction::Vertical, 1).compare("_"));
-    CHECK(board.read(56, 65, Direction::Horizontal, 1).compare("_"));
-    CHECK(board.read(6, 22, Direction::Vertical, 10).compare("___________"));
-    CHECK(board.read(98765, 64531, Direction::Horizontal, 6).compare("______"));
+   
     
-    // check post & read
-    CHECK_NOTHROW(board.post(1, 1, Direction::Horizontal, "You're braver than you believe"));
-    CHECK(board.read(1, 1, Direction::Horizontal, 30).compare("You're braver than you believe"));
-    
-    CHECK_NOTHROW(board.post(2, 1, Direction::Horizontal, "stronger than you seem"));
-    CHECK(board.read(2, 1, Direction::Horizontal, 22).compare("stronger than you seem"));
-    
-    CHECK_NOTHROW(board.post(3, 1, Direction::Horizontal, "and smarter than you think"));
-    CHECK(board.read(3, 1, Direction::Horizontal, 26).compare("and smarter than you think"));
+    CHECK(board.read(5,5,Direction::Horizontal,1).compare("_"));
+    CHECK_NOTHROW(board.post(5,5,Direction::Horizontal,"hello1"));
+    CHECK(board.read(5,5,Direction::Horizontal,6).compare("hello1"));
+    CHECK(board.read(5,11,Direction::Vertical,1).compare("1"));
+    CHECK(board.read(5,12,Direction::Horizontal,1).compare("_"));
 
-    CHECK(board.read(1, 1, Direction::Vertical, 6).compare("Ysa___"));
+    CHECK(board.read(5,5,Direction::Vertical,1).compare("_"));
+    CHECK_NOTHROW(board.post(5,5,Direction::Vertical,"hello2"));
+    CHECK(board.read(5,5,Direction::Vertical,6).compare("hello2"));
+    CHECK(board.read(11,5,Direction::Vertical,1).compare("2"));
+    CHECK(board.read(12,5,Direction::Vertical,1).compare("_"));
+
+    CHECK_NOTHROW(board.post(5,11,Direction::Horizontal,"3"));
+    CHECK(board.read(5,5,Direction::Horizontal,6).compare("hello3"));
+
+    CHECK_NOTHROW(board.post(5,5,Direction::Horizontal,"hdefag"));
+    CHECK(board.read(5,5,Direction::Horizontal,6).compare("hdefag"));
+
+    CHECK_NOTHROW(board.post(11,5,Direction::Vertical,"4"));
+    CHECK(board.read(5,5,Direction::Vertical,6).compare("hello4"));
+    CHECK_NOTHROW(board.post(5,5,Direction::Vertical,"hdefag"));
+    CHECK(board.read(5,5,Direction::Vertical,6).compare("hdefag"));
     
-    CHECK_NOTHROW(board.post(100, 2, Direction::Horizontal, "abcd"));
-    CHECK(board.read(100, 2, Direction::Horizontal, 4).compare("abcd"));
-    CHECK(board.read(100, 2, Direction::Vertical, 4).compare("a___"));
+    for(; i<ten; i++)
+    {
+       row= rand() %UINT16_MAX;
+       CHECK_NOTHROW(board.post(row,colum,Direction::Horizontal,"hello1"));
+       CHECK(board.read(row,colum,Direction::Horizontal,6).compare("hello1"));
 
-    CHECK_NOTHROW(board.post(100, 199, Direction::Vertical, "gsdhgs"));
-    CHECK(board.read(100, 199, Direction::Vertical, 6).compare("gsdhgs"));
-    CHECK(board.read(100, 199, Direction::Horizontal, 4).compare("gbcd"));
-    
-    CHECK_NOTHROW(board.post(12, 1,Direction::Vertical, "How U doin'?"));
-    CHECK(board.read(12, 1, Direction::Vertical, 12).compare("How U doin'?"));
+       CHECK_NOTHROW(board.post(row,colum,Direction::Vertical,"hello1"));
+       CHECK(board.read(row,colum,Direction::Vertical,6).compare("hello1"));    
+    }
+    for(; i<ten; i++)
+    {
+       colum= rand() % UINT16_MAX ;
+       CHECK_NOTHROW(board.post(row,colum,Direction::Horizontal,"hello1"));
+       CHECK(board.read(row,colum,Direction::Horizontal,6).compare("hello1"));
 
-    CHECK_NOTHROW(board.post(6, 95, Direction::Vertical, "I am short, fat and proud of that"));
-    CHECK(board.read(6, 95, Direction::Vertical, 33).compare("I am short, fat and proud of that"));
-
+       CHECK_NOTHROW(board.post(row,colum,Direction::Vertical,"hello1"));
+       CHECK(board.read(row,colum,Direction::Vertical,6).compare("hello1"));    
+    }
+     
 }
+
+
+
+    
+    

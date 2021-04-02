@@ -1,15 +1,24 @@
+#include <iostream>
 #include <string>
+#include <map>
 #include "Direction.hpp"
-
 using namespace std;
+#define TEN = 10
+extern std::map<unsigned int,std::map<unsigned int, string>> board;
 
-namespace ariel{
+
+namespace ariel
+{
     class Board{
-        unsigned int rows;
-        unsigned int cols;
+        unsigned int row;
+        unsigned int col;
+
     public:
-        static void post(unsigned int row, unsigned int column, Direction dierction, string info);
-        static string read(unsigned int row, unsigned int column, Direction dierction, unsigned int howMuch);
+        
+        Board();
+        static void post(unsigned int row, unsigned int col, Direction d, string str);
+        static string read(unsigned int row, unsigned int col, Direction d, 
+            unsigned int size);
         void show();
     };
 }
