@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include "Direction.hpp"
 using namespace std;
 #define TEN = 10
-extern std::map<unsigned int,std::map<unsigned int, string>> board;
+extern std::unordered_map<unsigned int,std::unordered_map<unsigned int, string>> b_map;
 
 
 namespace ariel
@@ -19,6 +19,6 @@ namespace ariel
         static void post(unsigned int row, unsigned int col, Direction d, string str);
         static string read(unsigned int row, unsigned int col, Direction d, 
             unsigned int size);
-        void show();
+        static void show();
     };
 }
